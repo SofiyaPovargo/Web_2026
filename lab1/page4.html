@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валюты разных стран</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse; 
+            margin: 20px 0;
+        }
+        
+        caption {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 15px;
+            caption-side: top;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #2980b9;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        td:nth-child(3) {
+            background-color: #f9f9f9;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e8f4fc;
+            transition: background-color 0.3s ease;
+        }
+        
+        .merged-cell {
+            background-color: #e8f6f3;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+        
+        .currency-code {
+            font-family: monospace;
+            background-color: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .back-link:hover {
+            background-color: #2980b9;
+        }
+        
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Курсы валют разных стран</h1>
+    
+    <div class="table-container">
+        <table>
+            <caption>Сравнительная таблица валют</caption>
+            <thead>
+                <tr>
+                    <th>Название валюты</th>
+                    <th>Курс к USD</th>
+                    <th>Количество для обмена</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🇺🇸 Доллар США (USD)</td>
+                    <td>1.00 USD</td>
+                    <td>1000</td>
+                </tr>
+                
+                <tr>
+                    <td>🇪🇺 Евро (EUR)</td>
+                    <td>0.92 USD</td>
+                    <td>850</td>
+                </tr>
+                
+                <tr>
+                    <td>🇬🇧 Фунт стерлингов (GBP)</td>
+                    <td>0.79 USD</td>
+                    <td>700</td>
+                </tr>
+                
+                <tr>
+                    <td>🇯🇵 Японская иена (JPY)</td>
+                    <td class="merged-cell" rowspan="3">Азиатские валюты<br>Групповой курс</td>
+                    <td>110,500</td>
+                </tr>
+                
+                <tr>
+                    <td>🇨🇳 Китайский юань (CNY)</td>
+                    <td>6,800</td>
+                </tr>
+                
+                <tr>
+                    <td>🇰🇷 Южнокорейская вона (KRW)</td>
+                    <td>1,320,000</td>
+                </tr>
+                
+                <tr>
+                    <td>🇨🇭 Швейцарский франк (CHF)</td>
+                    <td>0.88 USD</td>
+                    <td>900</td>
+                </tr>
+                
+                <tr>
+                    <td>🇨🇦 Канадский доллар (CAD)</td>
+                    <td>1.35 USD</td>
+                    <td>1,200</td>
+                </tr>
+                
+                <tr>
+                    <td>🇦🇺 Австралийский доллар (AUD)</td>
+                    <td class="merged-cell" rowspan="2">Океания<br>Схожий курс</td>
+                    <td>950</td>
+                </tr>
+                
+                <tr>
+                    <td>🇳🇿 Новозеландский доллар (NZD)</td>
+                    <td>920</td>
+                </tr>
+                
+                <tr>
+                    <td>🇷🇺 Российский рубль (RUB)</td>
+                    <td>90.50 USD</td>
+                    <td>85,000</td>
+                </tr>
+                
+                <tr>
+                    <td>🇧🇾 Белорусский рубль (BYN)</td>
+                    <td>3.25 USD</td>
+                    <td>3,100</td>
+                </tr>
+                
+                <tr>
+                    <td>🇺🇦 Украинская гривна (UAH)</td>
+                    <td>36.80 USD</td>
+                    <td>35,000</td>
+                </tr>
+                
+                <tr>
+                    <td>🇹🇷 Турецкая лира (TRY)</td>
+                    <td>32.15 USD</td>
+                    <td>30,500</td>
+                </tr>
+                
+                <tr>
+                    <td>🇮🇳 Индийская рупия (INR)</td>
+                    <td>83.00 USD</td>
+                    <td>78,000</td>
+                </tr>
+                
+                <tr>
+                    <td>🇧🇷 Бразильский реал (BRL)</td>
+                    <td>5.05 USD</td>
+                    <td>4,800</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 15px; background-color: #f8f9fa; font-weight: bold;">
+                        Всего валют: 15 | Данные актуальны на текущую дату
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="footer-note">
+            * Курсы валют являются приблизительными и могут меняться<br>
+            ** Количество указано в единицах валюты для обмена на 1000 USD
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="page1.html" class="back-link">Вернуться на главную</a>
+            <a href="page2.html" class="back-link" style="margin-left: 10px; background-color: #2ecc71;">К навигации</a>
+        </div>
+    </div>
+</body>
+</html>
