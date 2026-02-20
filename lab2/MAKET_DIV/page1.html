@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Зоопарк</title>
+        
+        <!-- Подключение Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+
+        <style>
+            .header {
+                text-align: center;
+                padding: 5px; 
+                background-color: rgb(51, 110, 26);
+                background-image: url('berlin-zoological-garden-2.jpg');
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .hiper-links::after {
+                text-decoration: none;
+                color: #91d95a;
+                border-bottom: 1px solid;
+                border-bottom-color: rgba(107, 209, 89, 0.2);
+            }
+
+            .gravitas-one-regular {
+                font-family: "Gravitas One", serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 45px; 
+                color: rgb(255, 255, 255);
+                padding: 10px;
+            }
+
+            .nav-links a {
+                text-decoration: none; 
+                color: #ffffff; 
+                font-size: 16px;
+                font-weight: 500;
+                padding: 8px 12px;
+                display: inline-block;
+                position: relative;
+                transition: color 0.3s ease;
+            }
+
+            .nav-links a::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 2px;
+                background-color: #91d95a; 
+                transition: width 0.3s ease;
+            }
+
+            .nav-links a:hover::after {
+                width: 80%; 
+            }
+
+            .nav-links a:hover {
+                color: #91d95a; 
+            }
+
+            .nav-links li {
+                list-style-type: none; 
+            }
+
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class='header' style='font-family: "Gravitas One", serif; text-align: center; background-color: rgb(51, 110, 26)'> 
+            <p class="gravitas-one-regular">ZOOLAND</p>
+        </div>
+        <div class="clearfix">
+            <!-- Левая колонка -->
+            <div class='nav-links' style='width: 15%; float: left; background-color: darkolivegreen;'>
+                <ul>
+                    <li><a href="about.html" title="о нас">о нас</a></li>
+                    <li><a href="timetable.html" title="график работы">график работы</a></li>
+                    <li><a href="price.html" title="цены">цены</a></li>
+                    <li><a href="animals.html" title="животные">животные</a></li>
+                    <li><a href="route.html" title="маршруты">маршруты</a></li>
+                </ul>
+            </div>
+            <!-- Центральная колонка -->
+            <div style='margin-left: 15%; margin-right: 200px; background-color: rgb(162, 188, 162);'>
+                <img src="london-zoo.jpg" style="float: center", width="600" height="400">
+                <p>
+                    Добро пожаловать в мир, где правят инстинкты. Zooland — это тысячи гектаров заповедной территории, воссозданные с ювелирной точностью прямо в черте города. 
+                    Здесь вы не просто смотрите на животных — вы слышите их дыхание, видите блеск в глазах хищника и наблюдаете за хрупкой грацией тех, кого в дикой природе уже почти не осталось. 
+                    Прикоснитесь к дикой природе, не покидая цивилизации.
+                </p>
+            </div>
+        </div>  
+        <div style='clear: both; background-color: brown;'>пропуск</div>  
+    </body>
+</html>
