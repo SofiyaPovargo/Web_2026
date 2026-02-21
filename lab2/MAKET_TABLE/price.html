@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Цены - ZOO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+    <style>
+        /* Базовые стили (аналогично about.html) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', Arial, sans-serif; }
+        .gravitas-one-regular {
+            font-family: "Gravitas One", serif;
+            font-weight: 400;
+            font-size: 30px;
+            color: white;
+            padding: 10px;
+        }
+        .nav-links {
+            background-color: darkolivegreen;
+            vertical-align: top;
+            padding: 15px 0 15px 20px;
+        }
+        .nav-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            color: white;
+            border-bottom: 2px solid #91d95a;
+            padding-bottom: 8px;
+            margin-right: 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            padding: 8px 8px;
+            display: inline-block;
+        }
+        .nav-links li { list-style-type: none; margin-bottom: 8px; }
+        .nav-links ol { padding-left: 5px; }
+
+        .center-column {
+            background-color: rgb(162, 188, 162);
+            vertical-align: top;
+            padding: 20px;
+        }
+        .right-column {
+            background-color: aquamarine;
+            vertical-align: top;
+            padding: 20px;
+            width: 200px;
+        }
+        .footer {
+            background-color: brown;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+        table { border-collapse: collapse; width: 100%; }
+        td { padding: 0; margin: 0; }
+
+        /* Уникальные стили для price */
+        h1 { color: rgb(51, 110, 26); margin-bottom: 20px; }
+        .price-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .price-card h2 { color: rgb(51, 110, 26); border-bottom: 2px solid rgb(51, 110, 26); padding-bottom: 10px; margin-bottom: 15px; }
+        .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #ccc; }
+        .price { font-weight: bold; color: brown; }
+        .discount { background-color: #e6f3e6; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <tr><td colspan="3" style="background-color: rgb(51, 110, 26); text-align: center;"><p class="gravitas-one-regular">ZOO</p></td></tr>
+        <tr>
+            <td width="15%" class="nav-links">
+                <h3>Меню</h3>
+                <ol>
+                    <li><a href="page1.html">на главную</a></li>
+                    <li><a href="about.html">о нас</a></li>
+                    <li><a href="timetable.html">график работы</a></li>
+                    <li><a href="price.html">цены</a></li>
+                    <li><a href="animals.html">животные</a></li>
+                    <li><a href="route.html">маршруты</a></li>
+                </ol>
+            </td>
+            <td class="center-column">
+                <h1>Цены на билеты</h1>
+                <div class="price-card">
+                    <h2>Входные билеты</h2>
+                    <div class="price-item"><span>Взрослый (с 18 лет)</span><span class="price">500 ₽</span></div>
+                    <div class="price-item"><span>Детский (7-17 лет)</span><span class="price">300 ₽</span></div>
+                    <div class="price-item"><span>Дошкольный (3-6 лет)</span><span class="price">200 ₽</span></div>
+                    <div class="price-item"><span>Льготный</span><span class="price">250 ₽</span></div>
+                    <div class="price-item"><span>Дети до 3 лет</span><span class="price">Бесплатно</span></div>
+                </div>
+                <!-- Остальные карточки цен ... -->
+                <div class="discount">
+                    <h3>Скидки и акции</h3>
+                    <p>• Семейный билет (2+2) - 1200 ₽</p>
+                    <p>• Именинникам вход бесплатно</p>
+                    <p>• Вторник - льготный день (скидка 20%)</p>
+                </div>
+            </td>
+            <td width="200" class="right-column">
+                <h3>Акция дня</h3>
+                <p>При покупке билета онлайн - скидка 10%</p>
+                <p>Студентам воскресенье - скидка 30%</p>
+            </td>
+        </tr>
+        <tr><td colspan="3" class="footer">© 2024 Zooland. Все права защищены.</td></tr>
+    </table>
+</body>
+</html>

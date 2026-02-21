@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Животные - ZOO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Базовые стили и стили для таблиц как в about.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .gravitas-one-regular {
+            font-family: "Gravitas One", serif;
+            font-weight: 400;
+            font-size: 30px;
+            color: white;
+            padding: 10px;
+        }
+        /* ... (стили меню, футера, колонок из about.html) ... */
+        .nav-links {
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+            background-color: darkolivegreen;
+            vertical-align: top;
+            padding: 15px 0 15px 20px;
+        }
+        .nav-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #91d95a;
+            padding-bottom: 8px;
+            margin-right: 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 8px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #91d95a;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 80%; }
+        .nav-links a:hover { color: #91d95a; }
+        .nav-links li {
+            list-style-type: none;
+            margin-bottom: 8px;
+        }
+        .nav-links ol { padding-left: 5px; }
+
+        .center-column {
+            background-color: rgb(162, 188, 162);
+            vertical-align: top;
+            padding: 20px;
+        }
+        .right-column {
+            background-color: aquamarine;
+            vertical-align: top;
+            padding: 20px;
+            width: 200px;
+        }
+        .footer {
+            background-color: brown;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td { padding: 0; margin: 0; }
+
+        /* Уникальные стили для страницы животных */
+        h1 { color: rgb(51, 110, 26); margin-bottom: 20px; }
+        .animal-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .animal-info h3 { color: rgb(51, 110, 26); margin-bottom: 10px; }
+        .animal-info p { margin-bottom: 8px; }
+        .category {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .predator { background-color: #ffebee; color: #c62828; }
+        .herbivore { background-color: #e8f5e8; color: #2e7d32; }
+        .bird { background-color: #e3f2fd; color: #1565c0; }
+        .rare { border: 2px solid gold; }
+    </style>
+</head>
+<body>
+    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+        <!-- Шапка -->
+        <tr>
+            <td colspan="3" style="background-color: rgb(51, 110, 26); text-align: center;">
+                <p class="gravitas-one-regular">ZOO</p>
+            </td>
+        </tr>
+        <!-- Ряд: Меню | Центр | Правая колонка -->
+        <tr>
+            <td width="15%" class="nav-links">
+                <h3>Меню</h3>
+                <ol>
+                    <li><a href="page1.html">на главную</a></li>
+                    <li><a href="about.html">о нас</a></li>
+                    <li><a href="timetable.html">график работы</a></li>
+                    <li><a href="price.html">цены</a></li>
+                    <li><a href="animals.html">животные</a></li>
+                    <li><a href="route.html">маршруты</a></li>
+                </ol>
+            </td>
+            <td class="center-column">
+                <h1>Наши животные</h1>
+
+                <div class="animal-card rare">
+                    <div class="animal-info">
+                        <span class="category predator">Хищник ★ Редкий</span>
+                        <h3>Амурский тигр</h3>
+                        <p><strong>Кличка:</strong> Амур</p>
+                        <p><strong>Возраст:</strong> 5 лет</p>
+                        <p><strong>Интересный факт:</strong> Амурские тигры - самые крупные среди тигров. В дикой природе их осталось около 500 особей.</p>
+                    </div>
+                </div>
+                <!-- Остальные карточки животных (сокращено для примера) -->
+                <div class="animal-card">
+                    <div class="animal-info">
+                        <span class="category herbivore">Травоядное</span>
+                        <h3>Африканский слон</h3>
+                        <p><strong>Кличка:</strong> Джамбо</p>
+                        <p><strong>Возраст:</strong> 12 лет</p>
+                        <p><strong>Интересный факт:</strong> Слоны - единственные млекопитающие, которые не умеют прыгать.</p>
+                    </div>
+                </div>
+                <!-- ... остальные животные ... -->
+            </td>
+            <td width="200" class="right-column">
+                <h3>Часы кормления</h3>
+                <p><strong>Тигры:</strong> 11:00, 16:00</p>
+                <p><strong>Пингвины:</strong> 12:30</p>
+                <p><strong>Обезьяны:</strong> 14:00</p>
+                <p><strong>Медведи:</strong> 15:30</p>
+            </td>
+        </tr>
+        <!-- Футер -->
+        <tr>
+            <td colspan="3" class="footer">© 2024 Zooland. Все права защищены.</td>
+        </tr>
+    </table>
+</body>
+</html>
