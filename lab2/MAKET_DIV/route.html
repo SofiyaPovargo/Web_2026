@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Маршруты - ZOO</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .gravitas-one-regular {
+            font-family: "Gravitas One", serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 30px; 
+            color: rgb(255, 255, 255);
+            padding: 10px;
+        }
+
+        .nav-links {
+            font-family: 'Montserrat', 'Roboto', sans-serif; 
+            padding: 15px 0 15px 20px; 
+            width: 15%;
+            float: left;
+            background-color: darkolivegreen;
+            min-height: 500px;
+        }
+        
+        .nav-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #91d95a; 
+            padding-bottom: 8px;
+            margin-right: 15px; 
+        }
+
+        .nav-links a {
+            text-decoration: none; 
+            color: #ffffff; 
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 8px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'Montserrat', 'Roboto', sans-serif; 
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #91d95a; 
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 80%; 
+        }
+
+        .nav-links a:hover {
+            color: #91d95a; 
+        }
+
+        .nav-links li {
+            list-style-type: none; 
+            margin-bottom: 8px;
+        }
+        
+        .nav-links ul, .nav-links ol {
+            padding-left: 5px; 
+        }
+        
+        .row {
+            display: flex;
+            min-height: 400px;
+        }
+        
+        .center-column {
+            width: calc(85% - 200px);
+            background-color: rgb(162, 188, 162);
+            padding: 20px;
+            margin-left: 15%;
+        }
+        
+        .right-column {
+            width: 200px;
+            background-color: aquamarine;
+            padding: 20px;
+        }
+        
+        .footer {
+            clear: both;
+            background-color: brown;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        h1 {
+            color: rgb(51, 110, 26);
+            margin-bottom: 20px;
+        }
+        
+        .route-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid rgb(51, 110, 26);
+        }
+        
+        .route-card h2 {
+            color: rgb(51, 110, 26);
+            margin-bottom: 15px;
+        }
+        
+        .route-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .route-points {
+            list-style-type: none;
+        }
+        
+        .route-points li {
+            padding: 8px 0;
+            padding-left: 25px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23336e1a"><circle cx="12" cy="12" r="8"/></svg>') left center no-repeat;
+        }
+        
+        .difficulty {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .easy {
+            background-color: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        .medium {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .hard {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .map-placeholder {
+            background-color: #e0e0e0;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div style='font-family: "Gravitas One", serif; text-align: center; background-color: rgb(51, 110, 26);'> 
+        <p class="gravitas-one-regular">ZOO</p>
+    </div>
+    
+    <div class="row">
+        <!-- Левая колонка с меню -->
+        <div class="nav-links">
+            <h3>Меню</h3>
+            <ol>
+                <li><a href="page1.html">на главную</a></li>
+                <li><a href="about.html" title="о нас">о нас</a></li>
+                <li><a href="timetable.html" title="график работы">график работы</a></li>
+                <li><a href="price.html" title="цены">цены</a></li>
+                <li><a href="animals.html" title="животные">животные</a></li>
+                <li><a href="route.html" title="маршруты">маршруты</a></li>
+            </ol>
+        </div>
+        
+        <div class="center-column">
+            <h1>Экскурсионные маршруты</h1>
+            
+            <div class="route-card">
+                <h2>Малый круг</h2>
+                <div class="route-stats">
+                    <span>⏱️ Время: 1 час</span>
+                    <span>📏 Длина: 1.5 км</span>
+                    <span class="difficulty easy">Легкий маршрут</span>
+                </div>
+                <ul class="route-points">
+                    <li>Вольер с птицами</li>
+                    <li>Пруд с фламинго</li>
+                    <li>Детский зоопарк</li>
+                    <li>Площадка с козами и овцами</li>
+                </ul>
+                <p><strong>Рекомендации:</strong> Идеально подходит для семей с маленькими детьми</p>
+            </div>
+            
+            <div class="route-card">
+                <h2>Большой круг</h2>
+                <div class="route-stats">
+                    <span>⏱️ Время: 2.5 часа</span>
+                    <span>📏 Длина: 3 км</span>
+                    <span class="difficulty medium">Средний маршрут</span>
+                </div>
+                <ul class="route-points">
+                    <li>Вольер с хищниками (тигры, львы)</li>
+                    <li>Обезьянник</li>
+                    <li>Террариум</li>
+                    <li>Слоновник</li>
+                    <li>Вольер с медведями</li>
+                    <li>Аквариум</li>
+                </ul>
+                <p><strong>Рекомендации:</strong> Основной маршрут, охватывающий всех крупных животных</p>
+            </div>
+            
+            <div class="route-card">
+                <h2>Сафари-тур</h2>
+                <div class="route-stats">
+                    <span>⏱️ Время: 3.5 часа</span>
+                    <span>📏 Длина: 5 км</span>
+                    <span class="difficulty hard">Сложный маршрут</span>
+                </div>
+                <ul class="route-points">
+                    <li>Все основные экспозиции</li>
+                    <li>Посещение кормления животных</li>
+                    <li>Лекция в лектории</li>
+                    <li>Фотосессия с ручными животными</li>
+                    <li>Посещение "Закулисья" зоопарка</li>
+                </ul>
+                <p><strong>Рекомендации:</strong> Для тех, кто хочет узнать всё о жизни зоопарка. Включает обед в кафе.</p>
+            </div>
+            
+            <div class="map-placeholder">
+                🗺️ Интерактивная карта зоопарка будет доступна в мобильном приложении
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <h3>Совет дня</h3>
+            <p>Начните с малого круга, если вы с детьми. Для полного осмотра выбирайте большой круг.</p>
+            <p>⬇️ Скачать карту в PDF</p>
+        </div>
+    </div>
+    
+    <div class="footer">© 2024 Zooland. Все права защищены.</div>
+</body>
+</html>

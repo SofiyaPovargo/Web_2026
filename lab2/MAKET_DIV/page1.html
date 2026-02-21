@@ -4,28 +4,52 @@
         <meta charset="utf-8">
         <title>Зоопарк</title>
         
-        <!-- Подключение Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
         <style>
             .header {
+                position: relative;
                 text-align: center;
                 padding: 5px; 
-                background-color: rgb(51, 110, 26);
-                background-image: url('berlin-zoological-garden-2.jpg');
+                background-color: rgb(195, 200, 193);
+                color: white;
+                z-index: 1;
+            }
+
+            .header::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('singapore-zoo.jpg');
+                background-size: cover;
+                background-position: center;
+                opacity: 0.6; 
+                filter: blur(2px) brightness(1); 
+                z-index: -1;
             }
 
             * {
                 box-sizing: border-box;
+                margin: 0;
+                padding: 0;
             }
 
-            .hiper-links::after {
-                text-decoration: none;
-                color: #91d95a;
-                border-bottom: 1px solid;
-                border-bottom-color: rgba(107, 209, 89, 0.2);
+            .route-card {
+                background-color: white;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-left: 5px solid rgb(51, 110, 26);
+            }
+            
+            body {
+                font-family: 'Roboto', Arial, sans-serif;
             }
 
             .gravitas-one-regular {
@@ -37,15 +61,42 @@
                 padding: 10px;
             }
 
+            p {
+                margin-bottom: 15px;
+                line-height: 1.6;
+            }
+            .nav-links {
+                font-family: 'Montserrat', 'Roboto', sans-serif; 
+                padding: 15px 0 15px 20px; 
+                width: 15%;
+                float: left;
+                background-color: darkolivegreen;
+                min-height: 500px;
+            }
+            
+            .nav-links h3 {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
+                font-weight: 600;
+                color: #ffffff;
+                margin-bottom: 15px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                border-bottom: 2px solid #91d95a; 
+                padding-bottom: 8px;
+                margin-right: 15px; 
+            }
+
             .nav-links a {
                 text-decoration: none; 
                 color: #ffffff; 
                 font-size: 16px;
                 font-weight: 500;
-                padding: 8px 12px;
+                padding: 8px 8px;
                 display: inline-block;
                 position: relative;
                 transition: color 0.3s ease;
+                font-family: 'Montserrat', 'Roboto', sans-serif; 
             }
 
             .nav-links a::after {
@@ -70,6 +121,11 @@
 
             .nav-links li {
                 list-style-type: none; 
+                margin-bottom: 8px;
+            }
+            
+            .nav-links ul, .nav-links ol {
+                padding-left: 5px; 
             }
 
             .clearfix::after {
@@ -77,16 +133,17 @@
                 clear: both;
                 display: table;
             }
-
-        </style>
+        </style> 
     </head>
     <body>
         <div class='header' style='font-family: "Gravitas One", serif; text-align: center; background-color: rgb(51, 110, 26)'> 
             <p class="gravitas-one-regular">ZOOLAND</p>
         </div>
+        
         <div class="clearfix">
-            <!-- Левая колонка -->
-            <div class='nav-links' style='width: 15%; float: left; background-color: darkolivegreen;'>
+            <!-- Левая колонка с меню -->
+            <div class="nav-links">
+                <h3>Меню</h3>
                 <ul>
                     <li><a href="about.html" title="о нас">о нас</a></li>
                     <li><a href="timetable.html" title="график работы">график работы</a></li>
@@ -95,16 +152,18 @@
                     <li><a href="route.html" title="маршруты">маршруты</a></li>
                 </ul>
             </div>
+            
             <!-- Центральная колонка -->
-            <div style='margin-left: 15%; margin-right: 200px; background-color: rgb(162, 188, 162);'>
-                <img src="london-zoo.jpg" style="float: center", width="600" height="400">
-                <p>
+            <div style='margin-left: 15%; margin-right: 0; background-color: rgb(162, 188, 162); padding: 20px; min-height: 500px;'>
+                <img src="london-zoo.jpg" style="display: block; margin: 0 auto 20px auto;" width="600" height="400" alt="Лондонский зоопарк">
+                <p class="route-card"; style="font-family: 'Roboto', Arial, sans-serif; line-height: 1.6; text-align: justify;">
                     Добро пожаловать в мир, где правят инстинкты. Zooland — это тысячи гектаров заповедной территории, воссозданные с ювелирной точностью прямо в черте города. 
                     Здесь вы не просто смотрите на животных — вы слышите их дыхание, видите блеск в глазах хищника и наблюдаете за хрупкой грацией тех, кого в дикой природе уже почти не осталось. 
                     Прикоснитесь к дикой природе, не покидая цивилизации.
                 </p>
             </div>
         </div>  
-        <div style='clear: both; background-color: brown;'>пропуск</div>  
+        
+        <div style='clear: both; background-color: rgb(86, 51, 25); padding: 20px; text-align: center; color: #ffffff;'>купить билет онлайн</div>  
     </body>
 </html>
