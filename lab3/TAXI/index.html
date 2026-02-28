@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление сервисом такси</title>
+    <style>
+        *,
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: url('2P9OZs.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: clamp(20px, 4vw, 28px);
+        }
+
+        .styled-button {
+            background-color: rgb(227, 214, 71);
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 8px;
+            font-size: 16px;
+        }
+
+        .styled-button:hover {
+            background-color: #000000;
+            color: rgb(227, 214, 71);
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="h1">Управление таксопарком</h1>
+        <div class="buttons">
+            <input class="styled-button" type="button" onclick="inputCar()" value="Ввод информации о машине" />
+            <input class="styled-button" type="button" onclick="deleteCar()" value="Удаление информации о машине" />
+            <input class="styled-button" type="button" onclick="getCar()" value="Получение информации о машине" />
+            <input class="styled-button" type="button" onclick="listAllCars()" value="Перечень всех машин" />
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function inputCar() {
+            const name = prompt("Введите название машины:");
+            if (!name || name.trim() === "") {
+                console.log("Название не введено.");
+                return;
+            }
+            const info = prompt("Введите описание машины:");
+            if (!info || info.trim() === "") {
+                console.log("Описание не введено.");
+                return;
+            }
+            AddCar(name.trim(), info.trim());
+            console.log("Машина добавлена.");
+        }
+
+        function deleteCar() {
+            const name = prompt("Введите название машины для удаления:");
+            if (!name || name.trim() === "") {
+                console.log("Название не введено.");
+                return;
+            }
+            DeleteCar(name.trim());
+            console.log(`Машина с названием "${name}" удалена (если существовала).`);
+        }
+
+        function getCar() {
+            const name = prompt("Введите название машины:");
+            if (!name || name.trim() === "") {
+                console.log("Название не введено.");
+                return;
+            }
+            const info = GetCarInfo(name.trim());
+            console.log(info);
+        }
+
+        function listAllCars() {
+            const list = ListCars();
+            if (list === "") {
+                console.log("Нет данных о машинах.");
+            } else {
+                console.log(list);
+            }
+        }
+    </script>
+</body>
+</html>
