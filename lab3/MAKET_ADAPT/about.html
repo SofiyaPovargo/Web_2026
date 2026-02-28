@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас - ZOO</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background-color: rgb(51, 110, 26);
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .gravitas-one-regular {
+            font-family: "Gravitas One", serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(24px, 5vw, 30px);
+            color: rgb(255, 255, 255);
+            padding: 10px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+        
+        .nav-links {
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+            background-color: darkolivegreen;
+            padding: 20px;
+            width: 250px; 
+            min-height: 500px;
+        }
+        
+        .nav-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #91d95a;
+            padding-bottom: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 8px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #91d95a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: #91d95a;
+        }
+
+        .nav-links li {
+            list-style-type: none;
+            margin-bottom: 8px;
+        }
+        
+        .nav-links ul, .nav-links ol {
+            padding-left: 5px;
+        }
+        
+        .center-column {
+            flex: 1;
+            background-color: rgb(162, 188, 162);
+            padding: 20px;
+            min-width: 300px;
+        }
+        
+        .right-column {
+            width: 250px;
+            background-color: aquamarine;
+            padding: 20px;
+        }
+        
+        .footer {
+            background-color: brown;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        h1 {
+            color: rgb(51, 110, 26);
+            margin-bottom: 20px;
+            font-size: clamp(20px, 4vw, 28px);
+        }
+
+        h2 {
+            color: rgb(51, 110, 26);
+            margin: 20px 0 10px;
+            font-size: clamp(18px, 3vw, 24px);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* АДАПТИВНОСТЬ: для узких экранов (до 768px) */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                width: 100%;
+                order: 2; 
+                min-height: auto;
+            }
+            
+            .center-column {
+                width: 100%;
+                order: 1;
+            }
+            
+            .right-column {
+                width: 100%;
+                order: 3;
+            }
+            
+            .nav-links ol {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-left: 0;
+            }
+            
+            .nav-links a {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links ol {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <div class="header">
+        <p class="gravitas-one-regular">ZOO</p>
+    </div>
+    
+    <!-- Основной контейнер с Flexbox -->
+    <div class="main-container">
+        <!-- Левая колонка с меню -->
+        <div class="nav-links">
+            <h3>Меню</h3>
+            <ol>
+                <li><a href="page1.html">на главную</a></li>
+                <li><a href="about.html" title="о нас">о нас</a></li>
+                <li><a href="timetable.html" title="график работы">график работы</a></li>
+                <li><a href="price.html" title="цены">цены</a></li>
+                <li><a href="animals.html" title="животные">животные</a></li>
+                <li><a href="route.html" title="маршруты">маршруты</a></li>
+            </ol>
+        </div>
+        
+        <!-- Центральная колонка с контентом -->
+        <div class="center-column">
+            <h1>О нас</h1>
+            <p>Zooland — это современный зоопарк, основанный в 1995 году. За более чем 25 лет мы превратились в один из крупнейших зоологических парков страны.</p>
+            
+            <h2>Наша миссия</h2>
+            <p>Сохранение биоразнообразия планеты, образование и просвещение посетителей, создание комфортных условий для животных, максимально приближенных к их естественной среде обитания.</p>
+            
+            <h2>Наши достижения</h2>
+            <ul>
+                <li>Участие в 15 международных программах по сохранению исчезающих видов</li>
+                <li>Более 500 успешных случаев размножения редких животных</li>
+                <li>Ежегодно нас посещают более 500 000 человек</li>
+                <li>Сотрудничество с ведущими зоопарками Европы</li>
+            </ul>
+            
+            <h2>Контактная информация</h2>
+            <p>Адрес: г. Москва, ул. Зоологическая, д. 1<br>
+            Телефон: +7 (495) 123-45-67<br>
+            Email: info@zooland.ru</p>
+        </div>
+        
+        <!-- Правая колонка -->
+        <div class="right-column">
+            <h3>Информация</h3>
+            <p><strong>Часы работы:</strong><br>Ежедневно с 10:00 до 20:00</p>
+            <p><strong>Ближайшие события:</strong><br>День открытых дверей - 15 июня</p>
+        </div>
+    </div>
+    
+    <!-- Подвал -->
+    <div class="footer">© 2024 Zooland. Все права защищены.</div>
+</body>
+</html>
