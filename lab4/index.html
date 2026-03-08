@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>🏥 Аптека - THashStorage</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f0f8ff; }
+        input, button { padding: 10px; margin: 5px; border-radius: 5px; }
+        input { border: 1px solid #ddd; width: 200px; }
+        button { 
+            background: #007bff; color: white; border: none; 
+            cursor: pointer; font-weight: bold;
+        }
+        button:hover { background: #0056b3; }
+        #info { 
+            margin-top: 20px; padding: 15px; 
+            border: 2px solid #007bff; border-radius: 8px; 
+            background: white; min-height: 50px;
+        }
+        h1 { color: #007bff; }
+    </style>
+</head>
+<body>
+    <h1>🏥 Аптека</h1>
+    
+    <div>
+        <input type="text" id="drugName" placeholder="Название лекарства">
+        <input type="text" id="drugInfo" placeholder="Описание, дозировка, цена">
+        <button onclick="addDrug()">Ввод информации о лекарстве</button>
+    </div>
+
+    <div>
+        <input type="text" id="deleteName" placeholder="Название лекарства">
+        <button onclick="deleteDrug()">Удаление информации о лекарстве</button>
+    </div>
+
+    <div>
+        <input type="text" id="getName" placeholder="Название лекарства">
+        <button onclick="getDrug()">Получение информации о лекарстве</button>
+    </div>
+
+    <div>
+        <button onclick="listDrugs()" style="background: #28a745;">Перечень всех лекарств</button>
+        <button onclick="pharmacy.Reset()" style="background: #dc3545;">Очистить аптеку</button>
+    </div>
+
+    <div id="info">Введите данные лекарств или используйте кнопки</div>
+
+    <script src="main.js"></script>
+    <script>
+        const pharmacy = new THashStorage();
+
+        pharmacy.AddValue("Парацетамол", "Таблетки 500мг, №10, анальгетик, 120₽");
+        pharmacy.AddValue("Амоксициллин", "Капсулы 500мг, №20, антибиотик, 380₽");
+        pharmacy.AddValue("Аспирин", "Таблетки 100мг, №28, жаропонижающее, 85₽");
+        pharmacy.AddValue("Но-шпа", "Таблетки 40мг, №24, спазмолитик, 210₽");
+
+        function addDrug() {
+            const name = document.getElementById('drugName').value.trim();
+            const info = document.getElementById('drugInfo').value.trim();
+            
+            if (name && info) {
+                pharmacy.AddValue(name, info);
+                showInfo(`Добавлено: <strong>${name}</strong>`);
+                clearInputs();
+            } else {
+                showInfo('Введите название и описание лекарства!');
+            }
+        }
+
+        function deleteDrug() {
+            const name = document.getElementById('deleteName').value.trim();
+            if (name) {
+                if (pharmacy.DeleteValue(name)) {
+                    showInfo(`Удалено: <strong>${name}</strong>`);
+                } else {
+                    showInfo(`Лекарство "${name}" не найдено в аптеке`);
+                }
+                document.getElementById('deleteName').value = '';
+            }
+        }
+
+        function getDrug() {
+            const name = document.getElementById('getName').value.trim();
+            if (name) {
+                const info = pharmacy.GetValue(name);
+                if (info) {
+                    showInfo(`<strong>${name}:</strong><br>${info}`);
+                } else {
+                    showInfo(`Лекарство "${name}" отсутствует`);
+                }
+                document.getElementById('getName').value = '';
+            }
+        }
+
+        function listDrugs() {
+            const drugs = pharmacy.GetKeys();
+            console.log("Перечень всех лекарств в аптеке");
+            console.log(drugs);
+            
+            if (drugs.length > 0) {
+                const list = drugs.map(d => `${d}`).join('<br>');
+                showInfo(`В аптеке <strong>${drugs.length}</strong> лекарств:<br>${list}`);
+            } else {
+                showInfo('Аптека пуста');
+            }
+        }
+
+        function clearInputs() {
+            document.getElementById('drugName').value = '';
+            document.getElementById('drugInfo').value = '';
+        }
+
+        function showInfo(html) {
+            document.getElementById('info').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
