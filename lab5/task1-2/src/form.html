@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма для бронирования</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .gravitas-one-regular {
+            font-family: "Gravitas One", serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 30px; 
+            color: rgb(255, 255, 255);
+            padding: 10px;
+        }
+
+        /* Единый стиль для меню на всех страницах */
+        .nav-links {
+            font-family: 'Montserrat', 'Roboto', sans-serif; 
+            padding: 15px 0 15px 20px; 
+            width: 15%;
+            float: left;
+            background-color: darkolivegreen;
+            min-height: 500px;
+        }
+        
+        .nav-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #91d95a; 
+            padding-bottom: 8px;
+            margin-right: 15px; 
+        }
+
+        .nav-links a {
+            text-decoration: none; 
+            color: #ffffff; 
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 8px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'Montserrat', 'Roboto', sans-serif; 
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #91d95a; 
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 80%; 
+        }
+
+        .nav-links a:hover {
+            color: #91d95a; 
+        }
+
+        .nav-links li {
+            list-style-type: none; 
+            margin-bottom: 8px;
+        }
+        
+        .nav-links ul, .nav-links ol {
+            padding-left: 5px; 
+        }
+        
+        .row {
+            display: flex;
+            min-height: 400px;
+        }
+        
+        .center-column {
+            width: calc(85% - 200px);
+            background-color: rgb(162, 188, 162);
+            padding: 20px;
+            margin-left: 15%;
+        }
+        
+        .right-column {
+            width: 200px;
+            background-color: aquamarine;
+            padding: 20px;
+        }
+        
+        .footer {
+            clear: both;
+            background-color: brown;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        h1 {
+            color: rgb(51, 110, 26);
+            margin-bottom: 20px;
+        }
+        /* Стили для динамической формы */
+        #myForm {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        #myForm div {
+            margin-bottom: 15px;
+        }
+        
+        #myForm label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        #myForm input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        #myForm input:focus {
+            outline: none;
+            border-color: #91d95a;
+            box-shadow: 0 0 5px rgba(145, 217, 90, 0.3);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* Основной стиль кнопки */
+        .styled-button {
+            background-color: #91d95a; /* Цвет, который вы изначально хотели */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход при наведении */
+        }
+
+        /* Стиль при наведении мыши (hover) */
+        .styled-button:hover {
+            background-color: #2db762;
+            color: rgb(175, 101, 108); /* Ваш цвет из кода */
+        }
+        .form-field { margin-bottom: 15px; }
+        .form-field label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-field input[type="text"], 
+        .form-field input[type="email"], 
+        .form-field select, 
+        .form-field textarea { width: 100%; padding: 8px; }
+        .form-field input[type="checkbox"] { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div style='font-family: "Gravitas One", serif; text-align: center; background-color: rgb(51, 110, 26);'> 
+        <p class="gravitas-one-regular">ZOO</p>
+    </div>
+    <div class="row">
+        <!-- Левая колонка с меню -->
+        <div class="nav-links">
+            <h3>Меню</h3>
+            <ol>
+                <li><a href="page1.html">на главную</a></li>
+                <li><a href="about.html" title="о нас">о нас</a></li>
+                <li><a href="timetable.html" title="график работы">график работы</a></li>
+                <li><a href="price.html" title="цены">цены</a></li>
+                <li><a href="animals.html" title="животные">животные</a></li>
+                <li><a href="route.html" title="маршруты">маршруты</a></li>
+                <li><a href="form.html" title="онлайн-бронирование билетов">онлайн-бронирование билетов</a></li>
+            </ol>
+        </div>
+        <!-- Центральная колонка с формой -->
+        <div class="center-column">
+            <h1>Бронирование билетов</h1>
+            <form id="myForm" name="userRegistrationForm"></form>
+        </div>
+    </div>
+    <div class="footer">© 2024 Zooland. Все права защищены.</div>
+    
+    <script>
+        const formFields = [
+            { tag: 'input', type: 'text', name: 'username', placeholder: 'Введите имя', label: 'Имя:' },
+            { tag: 'input', type: 'email', name: 'email', placeholder: 'Email', label: 'Email:' },
+            { tag: 'input', type: 'text', name: 'adults', placeholder: 'количество взрослых', label: 'Введите количество взрослых (14+):' },
+            { tag: 'input', type: 'text', name: 'children', placeholder: 'количество детей', label: 'Введите количество детей (3-14):' }
+        ];
+
+        function showInfo(htmlMessage) {
+            let infoBox = document.getElementById('infoMessage');
+            if (!infoBox) {
+                infoBox = document.createElement('div');
+                infoBox.id = 'infoMessage';
+                infoBox.style.marginTop = '15px';
+                infoBox.style.padding = '10px';
+                infoBox.style.borderRadius = '5px';
+                infoBox.style.backgroundColor = '#d4edda'; 
+                infoBox.style.color = '#155724'; 
+                const centerCol = document.querySelector('.center-column');
+                centerCol.appendChild(infoBox);
+            }
+            infoBox.innerHTML = htmlMessage;
+        }
+
+        /**
+         * Функция для динамической генерации полей формы
+         * @param {Array} fieldsArray - массив объектов с настройками полей
+         * @param {String} formId - ID формы
+         */
+        function createFormFields(fieldsArray, formId) {
+            const form = document.getElementById(formId);
+            if (form) {
+                // Очищаем форму перед добавлением новых полей
+                form.innerHTML = '';
+                
+                // Создаем поля формы
+                fieldsArray.forEach(fieldData => {
+                    const fieldWrapper = document.createElement('div');
+                    fieldWrapper.style.marginBottom = '15px';
+
+                    const label = document.createElement('label');
+                    label.textContent = fieldData.label;
+                    label.style.display = 'block';
+                    label.style.marginBottom = '5px';
+                    label.style.fontWeight = 'bold';
+
+                    const input = document.createElement('input');
+                    input.type = fieldData.type;
+                    input.name = fieldData.name;
+                    input.placeholder = fieldData.placeholder;
+                    input.style.width = '100%';
+                    input.style.padding = '8px';
+                    input.style.border = '1px solid #ddd';
+                    input.style.borderRadius = '4px';
+
+                    fieldWrapper.appendChild(label);
+                    fieldWrapper.appendChild(input);
+                    form.appendChild(fieldWrapper);
+                });
+
+                // Создаем кнопку отправки
+                const submitWrapper = document.createElement('div');
+                const submitButton = document.createElement('button');
+                submitButton.type = 'submit';
+                submitButton.textContent = 'Забронировать';
+                submitButton.classList.add('styled-button');
+                // submitButton.style.backgroundColor = '#91d95a';
+                // submitButton.style.buttons = 'white';
+                // submitButton.style.padding = '10px 20px';
+                // submitButton.style.border = 'none';
+                // submitButton.style.borderRadius = '4px';
+                // submitButton.style.cursor = 'pointer';
+                // submitButton.style.fontSize = '16px';
+                // submitButton.style.marginTop = '10px';
+                
+                submitWrapper.appendChild(submitButton);
+                form.appendChild(submitWrapper);
+
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); 
+
+                    const nameInput = form.querySelector('input[name="username"]');
+                    const name = nameInput ? nameInput.value : 'Гость';
+                    
+                    showInfo(`Спасибо, <strong>${name}</strong>! Ваша заявка на бронирование принята!`);
+                    
+                    const emailInput = form.querySelector('input[name="email"]');
+                    const adultsInput = form.querySelector('input[name="adults"]');
+                    const childrenInput = form.querySelector('input[name="children"]');
+                    
+                    const email = emailInput ? emailInput.value : 'не указан';
+                    const adults = adultsInput ? adultsInput.value : '0';
+                    const children = childrenInput ? childrenInput.value : '0';
+                    
+                    console.log(`Детали бронирования:
+                        Имя: ${name}
+                        Email: ${email}
+                        Взрослые: ${adults}
+                        Дети: ${children}
+                    `);
+                    form.querySelectorAll('input').forEach(input => {
+                        if (input.type !== 'submit') {
+                            input.value = '';
+                        }
+                    });
+                });
+        
+                showInfo(`Форма успешно создана! Пожалуйста, заполните все поля.`);
+            }
+            else {
+                console.error('Форма не найдена');
+                return;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            createFormFields(formFields, 'myForm');
+        });
+    </script>
+</body>
+</html>
