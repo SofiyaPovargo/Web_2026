@@ -17,21 +17,17 @@
         }
         
         body {
-            margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
         }
         
         .gravitas-one-regular {
             font-family: "Gravitas One", serif;
             font-weight: 400;
-            font-style: normal;
             font-size: 30px; 
             color: rgb(255, 255, 255);
             padding: 10px;
         }
 
-        /* Единый стиль для меню на всех страницах */
         .nav-links {
             font-family: 'Montserrat', 'Roboto', sans-serif; 
             padding: 15px 0 15px 20px; 
@@ -47,7 +43,6 @@
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 15px;
-            letter-spacing: 1px;
             text-transform: uppercase;
             border-bottom: 2px solid #91d95a; 
             padding-bottom: 8px;
@@ -63,7 +58,6 @@
             display: inline-block;
             position: relative;
             transition: color 0.3s ease;
-            font-family: 'Montserrat', 'Roboto', sans-serif; 
         }
 
         .nav-links a::after {
@@ -78,39 +72,18 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
-            width: 80%; 
-        }
-
-        .nav-links a:hover {
-            color: #91d95a; 
-        }
-
-        .nav-links li {
-            list-style-type: none; 
-            margin-bottom: 8px;
-        }
+        .nav-links a:hover::after { width: 80%; }
+        .nav-links a:hover { color: #91d95a; }
+        .nav-links li { list-style-type: none; margin-bottom: 8px; }
+        .nav-links ul, .nav-links ol { padding-left: 5px; }
         
-        .nav-links ul, .nav-links ol {
-            padding-left: 5px; 
-        }
-        
-        .row {
-            display: flex;
-            min-height: 400px;
-        }
+        .row { display: flex; min-height: 400px; }
         
         .center-column {
             width: calc(85% - 200px);
             background-color: rgb(162, 188, 162);
             padding: 20px;
             margin-left: 15%;
-        }
-        
-        .right-column {
-            width: 200px;
-            background-color: aquamarine;
-            padding: 20px;
         }
         
         .footer {
@@ -125,7 +98,8 @@
             color: rgb(51, 110, 26);
             margin-bottom: 20px;
         }
-        /* Стили для динамической формы */
+
+        /* Стили для формы */
         #myForm {
             max-width: 500px;
             margin: 0 auto;
@@ -135,39 +109,44 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        #myForm div {
-            margin-bottom: 15px;
-        }
+        .form-field { margin-bottom: 15px; position: relative; }
         
-        #myForm label {
+        .form-field label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #333;
         }
         
-        #myForm input {
+        .form-field input {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
+            transition: border-color 0.3s;
         }
         
-        #myForm input:focus {
+        .form-field input:focus {
             outline: none;
             border-color: #91d95a;
             box-shadow: 0 0 5px rgba(145, 217, 90, 0.3);
         }
-        
-        p {
-            margin-bottom: 15px;
-            line-height: 1.6;
+
+        .form-field input.error-input {
+            border-color: red !important;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.3) !important;
         }
 
-        /* Основной стиль кнопки */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none; 
+        }
+ 
         .styled-button {
-            background-color: #91d95a; /* Цвет, который вы изначально хотели */
+            background-color: #91d95a;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -175,21 +154,13 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
-            transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход при наведении */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Стиль при наведении мыши (hover) */
         .styled-button:hover {
             background-color: #2db762;
-            color: rgb(175, 101, 108); /* Ваш цвет из кода */
+            color: rgb(175, 101, 108);
         }
-        .form-field { margin-bottom: 15px; }
-        .form-field label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-field input[type="text"], 
-        .form-field input[type="email"], 
-        .form-field select, 
-        .form-field textarea { width: 100%; padding: 8px; }
-        .form-field input[type="checkbox"] { margin-right: 10px; }
     </style>
 </head>
 <body>
@@ -202,12 +173,12 @@
             <h3>Меню</h3>
             <ol>
                 <li><a href="page1.html">на главную</a></li>
-                <li><a href="about.html" title="о нас">о нас</a></li>
-                <li><a href="timetable.html" title="график работы">график работы</a></li>
-                <li><a href="price.html" title="цены">цены</a></li>
-                <li><a href="animals.html" title="животные">животные</a></li>
-                <li><a href="route.html" title="маршруты">маршруты</a></li>
-                <li><a href="form.html" title="онлайн-бронирование билетов">онлайн-бронирование билетов</a></li>
+                <li><a href="about.html">о нас</a></li>
+                <li><a href="timetable.html">график работы</a></li>
+                <li><a href="price.html">цены</a></li>
+                <li><a href="animals.html">животные</a></li>
+                <li><a href="route.html">маршруты</a></li>
+                <li><a href="form.html">онлайн-бронирование билетов</a></li>
             </ol>
         </div>
         <!-- Центральная колонка с формой -->
@@ -221,9 +192,10 @@
     <script>
         const formFields = [
             { tag: 'input', type: 'text', name: 'username', placeholder: 'Введите имя', label: 'Имя:' },
-            { tag: 'input', type: 'email', name: 'email', placeholder: 'Email', label: 'Email:' },
-            { tag: 'input', type: 'text', name: 'adults', placeholder: 'количество взрослых', label: 'Введите количество взрослых (14+):' },
-            { tag: 'input', type: 'text', name: 'children', placeholder: 'количество детей', label: 'Введите количество детей (3-14):' }
+            { tag: 'input', type: 'text', name: 'email', placeholder: 'Email', label: 'Email:' },
+            { tag: 'input', type: 'tel', name: 'phone', placeholder: 'Номер телефона', label: 'Телефон:' },
+            { tag: 'input', type: 'text', name: 'adults', placeholder: 'Количество взрослых', label: 'Введите количество взрослых (14+):' },
+            { tag: 'input', type: 'text', name: 'children', placeholder: 'Количество детей', label: 'Введите количество детей (3-14):' }
         ];
 
         function showInfo(htmlMessage) {
@@ -242,95 +214,137 @@
             infoBox.innerHTML = htmlMessage;
         }
 
-        /**
-         * Функция для динамической генерации полей формы
-         * @param {Array} fieldsArray - массив объектов с настройками полей
-         * @param {String} formId - ID формы
-         */
+        const validationRules = {
+            username: (value) => {
+                if (!value.trim()) return "Имя обязательно для заполнения";
+                if (!/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(value)) return "Имя может содержать только буквы";
+                if (value.length < 2) return "Имя слишком короткое";
+                return "";
+            },
+            email: (value) => {
+                if (!value.trim()) return "Email обязателен";
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) return "Введите корректный email (например: test@mail.ru)";
+                return "";
+            },
+            phone: (value) => {
+                if (!value.trim()) return "Телефон обязателен";
+                if (!/^\+\d{10,15}$/.test(value)) return "Телефон должен начинаться с + и содержать от 10 до 15 цифр";
+                return "";
+            },
+            adults: (value) => {
+                if (!value.trim()) return "Укажите количество взрослых";
+                if (!/^\d+$/.test(value)) return "Введите только число";
+                return "";
+            },
+            children: (value) => {
+                if (!value.trim()) return "Укажите количество детей (можно 0)";
+                if (!/^\d+$/.test(value)) return "Введите только число";
+                return "";
+            }
+        };
+
+        function validateSingleField(input, fieldName) {
+            const errorElement = document.getElementById(`error-${fieldName}`);
+            const rule = validationRules[fieldName];
+            
+            if (rule) {
+                const errorMessage = rule(input.value);
+                if (errorMessage) {
+                    errorElement.textContent = errorMessage;
+                    errorElement.style.display = 'block';
+                    input.classList.add('error-input');
+                    return false; 
+                } else {
+                    errorElement.textContent = '';
+                    errorElement.style.display = 'none';
+                    input.classList.remove('error-input');
+                    return true; 
+                }
+            }
+            return true;
+        }
+
         function createFormFields(fieldsArray, formId) {
             const form = document.getElementById(formId);
-            if (form) {
-                // Очищаем форму перед добавлением новых полей
-                form.innerHTML = '';
+            if (!form) return;
+            
+            form.innerHTML = '';
+            
+            fieldsArray.forEach(fieldData => {
+                const fieldWrapper = document.createElement('div');
+                fieldWrapper.classList.add('form-field');
+
+                const label = document.createElement('label');
+                label.textContent = fieldData.label;
+
+                const input = document.createElement('input');
+                input.type = fieldData.type;
+                input.name = fieldData.name;
+                input.placeholder = fieldData.placeholder;
+
+                const errorSpan = document.createElement('div');
+                errorSpan.id = `error-${fieldData.name}`;
+                errorSpan.classList.add('error-message');
+
+                input.addEventListener('input', function() {
+                    validateSingleField(input, fieldData.name);
+                });
+
+                fieldWrapper.appendChild(label);
+                fieldWrapper.appendChild(input);
+                fieldWrapper.appendChild(errorSpan); 
+                form.appendChild(fieldWrapper);
+            });
+
+            const submitWrapper = document.createElement('div');
+            const submitButton = document.createElement('button');
+            submitButton.type = 'submit';
+            submitButton.textContent = 'Забронировать';
+            submitButton.classList.add('styled-button');
+            
+            submitWrapper.appendChild(submitButton);
+            form.appendChild(submitWrapper);
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
                 
-                // Создаем поля формы
+                let isFormValid = true;
+
                 fieldsArray.forEach(fieldData => {
-                    const fieldWrapper = document.createElement('div');
-                    fieldWrapper.style.marginBottom = '15px';
-
-                    const label = document.createElement('label');
-                    label.textContent = fieldData.label;
-                    label.style.display = 'block';
-                    label.style.marginBottom = '5px';
-                    label.style.fontWeight = 'bold';
-
-                    const input = document.createElement('input');
-                    input.type = fieldData.type;
-                    input.name = fieldData.name;
-                    input.placeholder = fieldData.placeholder;
-                    input.style.width = '100%';
-                    input.style.padding = '8px';
-                    input.style.border = '1px solid #ddd';
-                    input.style.borderRadius = '4px';
-
-                    fieldWrapper.appendChild(label);
-                    fieldWrapper.appendChild(input);
-                    form.appendChild(fieldWrapper);
+                    const input = form.querySelector(`input[name="${fieldData.name}"]`);
+                    const isFieldValid = validateSingleField(input, fieldData.name);
+                    
+                    if (!isFieldValid) {
+                        isFormValid = false; 
+                    }
                 });
 
-                // Создаем кнопку отправки
-                const submitWrapper = document.createElement('div');
-                const submitButton = document.createElement('button');
-                submitButton.type = 'submit';
-                submitButton.textContent = 'Забронировать';
-                submitButton.classList.add('styled-button');
-                // submitButton.style.backgroundColor = '#91d95a';
-                // submitButton.style.buttons = 'white';
-                // submitButton.style.padding = '10px 20px';
-                // submitButton.style.border = 'none';
-                // submitButton.style.borderRadius = '4px';
-                // submitButton.style.cursor = 'pointer';
-                // submitButton.style.fontSize = '16px';
-                // submitButton.style.marginTop = '10px';
+                if (!isFormValid) {
+                    const infoBox = document.getElementById('infoMessage');
+                    if (infoBox) infoBox.style.display = 'none';
+                    return; 
+                }
+                const name = form.querySelector('input[name="username"]').value;
+                const email = form.querySelector('input[name="email"]').value;
+                const phone = form.querySelector('input[name="phone"]').value;
+                const adults = form.querySelector('input[name="adults"]').value;
+                const children = form.querySelector('input[name="children"]').value;
+
+                console.log(`Успешное бронирование:\nИмя: ${name}\nEmail: ${email}\nТелефон: ${phone}\nВзрослые: ${adults}\nДети: ${children}`);
                 
-                submitWrapper.appendChild(submitButton);
-                form.appendChild(submitWrapper);
+                const infoBox = document.getElementById('infoMessage');
+                if (infoBox) infoBox.style.display = 'block'; 
+                showInfo(`Спасибо, <strong>${name}</strong>! Ваша заявка на бронирование принята!`);
 
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault(); 
-
-                    const nameInput = form.querySelector('input[name="username"]');
-                    const name = nameInput ? nameInput.value : 'Гость';
-                    
-                    showInfo(`Спасибо, <strong>${name}</strong>! Ваша заявка на бронирование принята!`);
-                    
-                    const emailInput = form.querySelector('input[name="email"]');
-                    const adultsInput = form.querySelector('input[name="adults"]');
-                    const childrenInput = form.querySelector('input[name="children"]');
-                    
-                    const email = emailInput ? emailInput.value : 'не указан';
-                    const adults = adultsInput ? adultsInput.value : '0';
-                    const children = childrenInput ? childrenInput.value : '0';
-                    
-                    console.log(`Детали бронирования:
-                        Имя: ${name}
-                        Email: ${email}
-                        Взрослые: ${adults}
-                        Дети: ${children}
-                    `);
-                    form.querySelectorAll('input').forEach(input => {
-                        if (input.type !== 'submit') {
-                            input.value = '';
-                        }
-                    });
+                form.querySelectorAll('input').forEach(input => {
+                    if (input.type !== 'submit') {
+                        input.value = '';
+                        input.classList.remove('error-input'); 
+                    }
                 });
-        
-                showInfo(`Форма успешно создана! Пожалуйста, заполните все поля.`);
-            }
-            else {
-                console.error('Форма не найдена');
-                return;
-            }
+            });
+    
+            showInfo(`Форма успешно создана! Пожалуйста, заполните все поля.`);
         }
         
         document.addEventListener('DOMContentLoaded', function() {
