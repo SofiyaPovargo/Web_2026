@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Динамическое меню и хранилище - ZOO</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Шапка с логотипом — стиль как на других страницах */
+        .site-header {
+            font-family: "Gravitas One", serif;
+            text-align: center;
+            background-color: rgb(51, 110, 26);
+            padding: 10px;
+        }
+        .gravitas-one-regular {
+            font-family: "Gravitas One", serif;
+            font-weight: 400;
+            font-size: 30px;
+            color: rgb(255, 255, 255);
+            padding: 10px;
+        }
+
+        /* Контейнер для основного макета (как в about, animals) */
+        .main-layout {
+            display: flex;
+            min-height: 500px;
+        }
+
+        /* Левое меню (навигация по сайту) — полная копия стиля из других страниц */
+        .nav-links {
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+            padding: 15px 0 15px 20px;
+            flex: 0 0 15%;
+            min-width: 0;
+            background-color: darkolivegreen;
+            min-height: 500px;
+        }
+        .nav-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #91d95a;
+            padding-bottom: 8px;
+            margin-right: 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 8px;
+            display: inline-block;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+        }
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #91d95a;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+        .nav-links a:hover {
+            color: #91d95a;
+        }
+        .nav-links li {
+            list-style-type: none;
+            margin-bottom: 8px;
+        }
+        .nav-links ul, .nav-links ol {
+            padding-left: 5px;
+        }
+
+        /* Центральная колонка — основной контент */
+        .center-column {
+            flex: 1 1 auto;
+            min-width: 0;
+            background-color: rgb(162, 188, 162);
+            padding: 25px;
+            min-height: 500px;
+        }
+
+        /* Правая колонка (доп. инфо) */
+        .right-column {
+            flex: 0 0 200px;
+            min-width: 0;
+            background-color: aquamarine;
+            padding: 20px;
+        }
+
+        .footer {
+            clear: both;
+            background-color: brown;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            color: rgb(51, 110, 26);
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Стили для горизонтального динамического меню */
+        .dynamic-horizontal-menu {
+            background-color: #2c3e2f;
+            padding: 0;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 100;
+        }
+        .menu-level-0 {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: stretch;
+        }
+        .menu-level-0 > .menu-item {
+            flex: 1 1 auto;
+            min-width: 7.5rem;
+            max-width: 100%;
+        }
+        .menu-item {
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+        .menu-item > .item-title {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            font-weight: 500;
+            font-family: 'Montserrat', 'Roboto', sans-serif;
+            background-color: #2c3e2f;
+            transition: background 0.2s ease;
+            border-right: 1px solid #4a6741;
+            white-space: nowrap;
+        }
+        /* верхний ряд: перенос текста и выравнивание, чтобы помещались длинные пункты */
+        .menu-level-0 > .menu-item > .item-title {
+            white-space: normal;
+            line-height: 1.25;
+            text-align: center;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+        .menu-item:hover > .item-title {
+            background-color: #4a6e3a;
+        }
+        /* выпадающее подменю (вертикальное) */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background-color: #2c3e2f;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            list-style: none;
+            padding: 5px 0;
+            margin: 0;
+            z-index: 1000;
+            display: none;
+        }
+        .submenu .menu-item {
+            display: block;
+        }
+        .submenu .menu-item > .item-title {
+            padding: 10px 18px;
+            background-color: #2c3e2f;
+            border-right: none;
+            border-bottom: 1px solid #4a6741;
+            white-space: nowrap;
+        }
+        .submenu .menu-item:last-child > .item-title {
+            border-bottom: none;
+        }
+        /* подменю третьего уровня — появляется справа */
+        .submenu .submenu {
+            top: 0;
+            left: 100%;
+            border-radius: 6px;
+            margin-left: 2px;
+        }
+        /* отображение активного подменю */
+        .menu-item.active-sub > .submenu {
+            display: block;
+        }
+        .info-panel h3 {
+            color: rgb(51, 110, 26);
+            margin-bottom: 12px;
+        }
+        .selected-url {
+            font-family: monospace;
+            word-break: break-all;
+            background: #e9ecef;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        .demo-note {
+            background-color: #d9e6c3;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: rgb(51, 110, 26);
+            border: none;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-header">
+    <p class="gravitas-one-regular">ZOO</p>
+</div>
+<div class="main-layout">
+    <!-- Левое меню (стандартное для всех страниц) -->
+    <div class="nav-links">
+        <h3>Меню</h3>
+        <ol>
+            <li><a href="page1.html">на главную</a></li>
+            <li><a href="about.html" title="о нас">о нас</a></li>
+            <li><a href="timetable.html" title="график работы">график работы</a></li>
+            <li><a href="price.html" title="цены">цены</a></li>
+            <li><a href="animals.html" title="животные">животные</a></li>
+            <li><a href="route.html" title="маршруты">маршруты</a></li>
+            <li><a href="menu.html" title="интерактивное меню">интерактивное меню</a></li>
+        </ol>
+    </div>
+
+    <div class="center-column">
+        <h1>Интерактивное горизонтальное меню</h1>
+        <div class="demo-note">
+            💡 <strong>Динамическое построение</strong> | Пункты с ▼ открывают подменю по клику. Пункты о животных ведут в статьи <strong>Википедии</strong> (открываются в новой вкладке). Цены и экскурсии — на страницы сайта.
+        </div>
+        
+        <!-- Контейнер, куда будет встроено динамическое горизонтальное меню -->
+        <div id="dynamicMenuContainer" class="dynamic-horizontal-menu"></div>
+        
+        <p style="margin-top: 20px; font-style: italic; color: #2d4a1e;">
+            ⚡ Меню строится на основе JavaScript-массива любой вложенности. Реализована рекурсивная функция ShowMenu, 
+            которая создает дочерние блоки и управляет появлением по клику.
+        </p>
+    </div>
+    
+    <div class="right-column">
+        <h3>О меню</h3>
+        <p>Горизонтальное меню верхнего уровня.</p>
+        <p>Выпадающие подменю при клике (onclick).</p>
+        <p>Поддержка неограниченной вложенности.</p>
+        <p>Названия пунктов и URL соответствуют тематике зоопарка.</p>
+        <p><strong>Вариант задания:</strong> подпункты содержат информацию о животных, зонах и сервисах.</p>
+    </div>
+</div>
+
+<div class="footer">© 2024 Zooland. Все права защищены.</div>
+<script>
+    const W = 'https://ru.wikipedia.org/wiki/';
+    const MenuData = [
+        {
+            name: '🦁 Хищники',
+            submenu: [
+                {
+                    name: '🐅 Тигры',
+                    submenu: [
+                        { name: 'Амурский тигр', url: W + encodeURIComponent('Амурский_тигр') },
+                        { name: 'Бенгальский тигр', url: W + encodeURIComponent('Бенгальский_тигр') },
+                        { name: 'Тигр (обзор)', url: W + encodeURIComponent('Тигр') }
+                    ]
+                },
+                {
+                    name: '🦁 Львы',
+                    submenu: [
+                        { name: 'Лев', url: W + encodeURIComponent('Лев') },
+                        { name: 'Белый лев', url: W + encodeURIComponent('Белый_лев') }
+                    ]
+                },
+                { name: '🐺 Волки', url: W + encodeURIComponent('Волк') },
+                { name: '🐻 Бурый медведь', url: W + encodeURIComponent('Бурый_медведь') }
+            ]
+        },
+        {
+            name: '🦒 Травоядные',
+            submenu: [
+                { name: '🦒 Жираф', url: W + encodeURIComponent('Жираф') },
+                {
+                    name: '🐘 Слоны',
+                    submenu: [
+                        { name: 'Африканский слон', url: W + encodeURIComponent('Африканский_слон') },
+                        { name: 'Азиатский слон', url: W + encodeURIComponent('Азиатский_слон') },
+                        { name: 'Слоновые', url: W + encodeURIComponent('Слоновые') }
+                    ]
+                },
+                { name: '🦓 Зебры', url: W + encodeURIComponent('Зебры') },
+                { name: '🦏 Носороги', url: W + encodeURIComponent('Носороговые') }
+            ]
+        },
+        {
+            name: '🐧 Птицы и рептилии',
+            submenu: [
+                { name: '🐧 Пингвины', url: W + encodeURIComponent('Пингвины') },
+                { name: '🦩 Фламинго', url: W + encodeURIComponent('Фламинго') },
+                {
+                    name: '🐍 Рептилии',
+                    submenu: [
+                        { name: 'Крокодилы', url: W + encodeURIComponent('Крокодилы') },
+                        { name: 'Змеи', url: W + encodeURIComponent('Змеи') },
+                        { name: 'Черепахи', url: W + encodeURIComponent('Черепахи') }
+                    ]
+                },
+                { name: '🦜 Попугаи', url: W + encodeURIComponent('Попугаевые') }
+            ]
+        },
+        {
+            name: '🎟️ Услуги и цены',
+            submenu: [
+                { name: '💵 Стоимость билетов', url: 'price.html' },
+                { name: '🎓 Экскурсии', url: 'route.html' },
+                {
+                    name: '🎁 Доп. услуги',
+                    submenu: [
+                        { name: 'Зоопарк', url: 'page1.html' },
+                        { name: 'Кормление в зоопарке', url: W + encodeURIComponent('Зоопарк') },
+                        { name: 'Экскурсия', url: 'route.html' }
+                    ]
+                },
+                { name: '🎂 День рождения в зоопарке', url: 'price.html'}
+            ]
+        },
+        {
+            name: '🗓️ События',
+            submenu: [
+                { name: '📅 Зоопарк', url: W + encodeURIComponent('Зоопарк') },
+                { name: '🎨 Экологическое просвещение', url: W + encodeURIComponent('Экологическое_просвещение') },
+                { name: '🌙 Ночные животные', url: W + encodeURIComponent('Ночные_животные') },
+                { name: '🐾 Зоопарк (мероприятия)', url: W + encodeURIComponent('Зоопарк') }
+            ]
+        },
+        {
+            name: 'ℹ️ О зоопарке',
+            url: 'about.html'
+        }
+    ];
+
+    function navigateByUrl(url) {
+        if (!url || url === '#') {
+            return;
+        }
+        if (/^https?:\/\//i.test(url)) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        } else {
+            window.location.href = url;
+        }
+    }
+
+    function getMenuContainer() {
+        return document.getElementById('dynamicMenuContainer');
+    }
+
+    /** Закрыть все выпадающие панели внутри блока динамического меню */
+    function closeAllSubmenusInMenu() {
+        const box = getMenuContainer();
+        if (!box) return;
+        box.querySelectorAll('.submenu').forEach(function (sub) {
+            sub.remove();
+        });
+        box.querySelectorAll('.menu-item.active-sub').forEach(function (li) {
+            li.classList.remove('active-sub');
+        });
+    }
+
+    /** У соседних пунктов того же вертикального списка убрать открытые подменю */
+    function closeSiblingSubmenus(menuItemLi) {
+        const parentUl = menuItemLi.parentElement;
+        if (!parentUl || !parentUl.classList.contains('submenu')) {
+            return;
+        }
+        var siblings = parentUl.children;
+        for (var s = 0; s < siblings.length; s++) {
+            var sib = siblings[s];
+            if (sib === menuItemLi || !sib.classList.contains('menu-item')) {
+                continue;
+            }
+            var sm = sib.querySelector(':scope > .submenu');
+            if (sm) {
+                sm.remove();
+            }
+            sib.classList.remove('active-sub');
+        }
+    }
+
+    /** Другие корневые пункты (верхняя полоса): закрыть их подменю */
+    function closeOtherRootSubmenus(currentTopLi) {
+        var box = getMenuContainer();
+        if (!box) return;
+        var rootUl = box.querySelector(':scope > .menu-level-0');
+        if (!rootUl) return;
+        var tops = rootUl.children;
+        for (var t = 0; t < tops.length; t++) {
+            var topLi = tops[t];
+            if (topLi === currentTopLi || !topLi.classList.contains('menu-item')) {
+                continue;
+            }
+            var sm = topLi.querySelector(':scope > .submenu');
+            if (sm) {
+                sm.remove();
+            }
+            topLi.classList.remove('active-sub');
+        }
+    }
+
+    function ShowMenu(MenuItemsA, ParentElem) {
+        const existingSub = ParentElem.querySelector(':scope > .submenu');
+        if (existingSub) {
+            existingSub.remove();
+            ParentElem.classList.remove('active-sub');
+            return null;
+        }
+
+        const subUl = document.createElement('ul');
+        subUl.className = 'submenu';
+
+        for (let i = 0; i < MenuItemsA.length; i++) {
+            const item = MenuItemsA[i];
+            const li = document.createElement('li');
+            li.className = 'menu-item';
+
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'item-title';
+            let displayName = item.name;
+            if (item.submenu && item.submenu.length > 0) {
+                displayName = item.name + ' ▼';
+            }
+            titleSpan.textContent = displayName;
+
+            li.appendChild(titleSpan);
+
+            if (item.submenu && item.submenu.length > 0) {
+                titleSpan.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    let existing = li.querySelector(':scope > .submenu');
+                    if (existing) {
+                        existing.remove();
+                        li.classList.remove('active-sub');
+                    } else {
+                        closeSiblingSubmenus(li);
+                        ShowMenu(item.submenu, li);
+                        li.classList.add('active-sub');
+                    }
+                });
+            } else {
+                titleSpan.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    if (item.url && item.url !== '#') {
+                        navigateByUrl(item.url);
+                        return;
+                    }
+                    event.preventDefault();
+                    const urlInfo = item.url ? item.url : '(ссылка отсутствует)';
+                    document.getElementById('selectedInfo').innerHTML =
+                        '<strong>' + item.name + '</strong><br>' +
+                        'URL: <span class="selected-url">' + urlInfo + '</span>';
+                    if (item.url === '#') {
+                        document.getElementById('selectedInfo').innerHTML +=
+                            '<br><span style="color: gray;">Якорь на этой странице</span>';
+                    }
+                });
+            }
+
+            subUl.appendChild(li);
+        }
+
+        ParentElem.appendChild(subUl);
+        return subUl;
+    }
+    
+    function buildHorizontalMenu(menuArray, container) {
+        container.innerHTML = ''; 
+        const ul = document.createElement('ul');
+        ul.className = 'menu-level-0';
+        
+        for (let i = 0; i < menuArray.length; i++) {
+            const item = menuArray[i];
+            const li = document.createElement('li');
+            li.className = 'menu-item';
+            
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'item-title';
+            let displayName = item.name;
+            if (item.submenu && item.submenu.length > 0) {
+                displayName = item.name + ' ▼';
+            }
+            titleSpan.textContent = displayName;
+            li.appendChild(titleSpan);
+            
+            if (item.submenu && item.submenu.length > 0) {
+                titleSpan.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    let existingSub = li.querySelector(':scope > .submenu');
+                    if (existingSub) {
+                        existingSub.remove();
+                        li.classList.remove('active-sub');
+                    } else {
+                        closeOtherRootSubmenus(li);
+                        ShowMenu(item.submenu, li);
+                        li.classList.add('active-sub');
+                    }
+                });
+            } else {
+                titleSpan.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    if (item.url && item.url !== '#') {
+                        navigateByUrl(item.url);
+                        return;
+                    }
+                    event.preventDefault();
+                    closeAllSubmenusInMenu();
+                    const urlVal = item.url ? item.url : '(нет ссылки)';
+                    document.getElementById('selectedInfo').innerHTML =
+                        '<strong>' + item.name + '</strong><br>' +
+                        'URL: <span class="selected-url">' + urlVal + '</span>';
+                    if (item.url === '#') {
+                        document.getElementById('selectedInfo').innerHTML +=
+                            '<br><span style="color: gray;">Якорь на этой странице</span>';
+                    }
+                });
+            }
+            ul.appendChild(li);
+        }
+        container.appendChild(ul);
+    }
+
+    document.addEventListener('click', function (event) {
+        var menuContainer = document.getElementById('dynamicMenuContainer');
+        if (menuContainer && !menuContainer.contains(event.target)) {
+            closeAllSubmenusInMenu();
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('dynamicMenuContainer');
+        if (container) {
+            buildHorizontalMenu(MenuData, container);
+        }
+    });
+</script>
+</body>
+</html>
