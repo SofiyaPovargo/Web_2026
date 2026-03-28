@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отдел информационных технологий предприятия.</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: clamp(20px, 4vw, 28px);
+        }
+
+        header {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #2E3BFF 0%, #00C6FF 50%, #9D00FF 100%);
+            --secondary-gradient: linear-gradient(135deg, #FF2EED 0%, #00FFE0 100%);
+            --dark-color: #0A1128;
+            --light-color: #F7F9FC;
+            --accent-color: #00FFD1;
+            --transition-speed: 0.3s;
+            --font-main: 'Manrope', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 700px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background-color: var(--dark-color);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .background-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(10, 17, 40, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 17, 40, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            padding: 10px 0;
+        }
+
+        .hamburger {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            position: relative;
+            z-index: 100;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hamburger-line {
+            width: 20px;
+            height: 2px;
+            background-color: var(--light-color);
+            margin: 2px 0;
+            transition: all var(--transition-speed);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 80px;
+            right: 0;
+            background: rgba(10, 17, 40, 0.95);
+            backdrop-filter: blur(10px);
+            width: 250px;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            transition: all var(--transition-speed);
+            z-index: 50;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 16px;
+            margin: 8px 0;
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 24px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-link:hover::after {
+            width: calc(100% - 32px);
+        }
+
+        .hero-content {
+            margin-top: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0.3;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-pill:hover::before {
+            transform: translateX(100%);
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 500px;
+        }
+
+        .cta-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .cta-button {
+            padding: 14px 32px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--light-color);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-gradient);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+            position: relative;
+            z-index: 1;
+            transition: transform var(--transition-speed);
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(4px);
+        }
+
+        .cta-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--light-color);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .animated-shape {
+            position: absolute;
+            z-index: 1;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 12s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background: #2E3BFF;
+            top: -100px;
+            right: -50px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 180px;
+            height: 180px;
+            background: #9D00FF;
+            bottom: -80px;
+            left: -60px;
+            animation-delay: -3s;
+        }
+
+        .shape-3 {
+            width: 120px;
+            height: 120px;
+            background: #00FFD1;
+            top: 40%;
+            right: -30px;
+            animation-delay: -6s;
+        }
+
+        @keyframes float {
+        0%, 100% {
+            transform: translate(0, 0);
+        }
+        25% {
+            transform: translate(-20px, 20px);
+        }
+        50% {
+            transform: translate(10px, -15px);
+        }
+        75% {
+            transform: translate(15px, 10px);
+        }
+        }
+
+        @media (max-width: 600px) {
+        .hero-title {
+            font-size: 36px;
+        }
+        
+        .hero-subtitle {
+            font-size: 16px;
+        }
+        
+        .cta-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .cta-button, .cta-secondary {
+            width: 100%;
+        }
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--accent-color);
+            opacity: 0.6;
+            pointer-events: none;
+        } 
+
+        th {
+            background-color: #3498db;
+            color: rgb(9, 8, 21);
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #2980b9;
+        }
+
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto; 
+            padding: 20px;
+            background: rgba(10, 17, 40, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        #it-dept table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #it-dept th,
+        #it-dept td {
+            padding: 15px 20px;
+            text-align: left;
+            color: #333;
+        }
+
+        #it-dept th {
+            background: linear-gradient(135deg, #2E3BFF 0%, #00C6FF 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        #it-dept td {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        #it-dept tr:last-child td {
+            border-bottom: none;
+        }
+
+        #it-dept tr:hover td {
+            background: #f5f5f5;
+        }
+
+        #it-dept h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            font-size: 28px;
+        }
+
+        #home {
+            padding: 30px;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .intro p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+            align-items: stretch; 
+        }
+
+        .features > div {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column; 
+            height: 100%;
+        }
+
+        .features h3 {
+            color: #00FFD1;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .features p {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            flex-grow: 1; 
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #2E3BFF 0%, #00C6FF 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .page {
+                padding: 15px;
+            }
+    
+            #it-dept th,
+            #it-dept td {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        .hero-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-title h1 {
+            font-size: clamp(24px, 5vw, 42px);
+            margin-bottom: 10px;
+        }
+
+        .hero-title p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .page {
+            display: none; 
+        }
+
+        .page.active {
+            display: block; 
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="hero-title">
+            <h1>Отдел информационных технологий предприятия</h1>
+            <p>Single Page Application (SPA)</p>
+        </div>
+
+        <!-- Главная страница -->
+        <div id="home" class="page active">
+            <div class="intro">
+                <p>Добро пожаловать в информационное приложение по Отделу информационных технологий предприятия!</p>
+                <p>Здесь вы можете ознакомиться с общей информацией и перейти к просмотру структуры отдела.</p>
+            </div>
+            <div class="features">
+                <div>
+                    <h3>Цель отдела</h3>
+                    <p>Обеспечение стабильной работы IT-инфраструктуры, разработка и поддержка информационных систем предприятия.</p>
+                </div>
+                <div>
+                    <h3>Основные задачи</h3>
+                    <p>Администрирование сетей, поддержка пользователей, обеспечение информационной безопасности, разработка ПО.</p>
+                </div>
+                <div>
+                    <h3>Структура</h3>
+                    <p>Включает руководителя, системных администраторов, разработчиков, специалистов по безопасности и техподдержке.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn" onclick="showPage('it-dept')">Перейти к структуре отдела</button>
+            </div>
+        </div>
+        <!-- Вторая страница: таблица -->
+        <div id="it-dept" class="page">
+            <button class="btn btn-back" onclick="showPage('home')">На главную</button>
+            <h2>Структура Отдела информационных технологий</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Должность</th>
+                        <th>Описание обязанностей</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CIO / Директор по IT</td>
+                        <td>Разработка IT-стратегии, контроль инфраструктуры, обеспечение кибербезопасности, влияние IT на бизнес.</td>
+                    </tr>
+                    <tr>
+                        <td>Системный администратор</td>
+                        <td>Обслуживание серверов и сетей, ежедневное управление инфраструктурой, устранение неполадок.</td>
+                    </tr>
+                    <tr>
+                        <td>Специалист техподдержки</td>
+                        <td>Прием заявок пользователей, диагностика ПК и ПО, консультации по использованию техники.</td>
+                    </tr>
+                    <tr>
+                        <td>Специалист по безопасности</td>
+                        <td>Мониторинг угроз, аудит безопасности, разработка политики защиты IT-систем.</td>
+                    </tr>
+                    <tr>
+                        <td>Разработчик ПО</td>
+                        <td>Создание и кастомизация ПО, настройка систем управления данными для предприятия.</td>
+                    </tr>
+                    <tr>
+                        <td>Администратор БД</td>
+                        <td>Управление хранением и извлечением данных, оптимизация баз данных.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
